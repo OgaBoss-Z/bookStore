@@ -1,0 +1,49 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <main class="main">
+        <div class="banner banner-cat">
+            <div class="banner-content container-fluid">
+                <h1 class="banner-title"><span>Buy Used Books</span></h1>
+                <h3 class="banner-subtitle">Up to <strong>70% OFF</strong></h3>
+
+                <a href="#" class="btn btn-link" role="button">Shop Now</a>
+            </div><!-- End .banner-content -->
+        </div><!-- End .banner -->
+
+        <div class="category-wrapper pt-5">
+            <h2 class="carousel-title">Featured Products</h2>
+            <div class="row row-sm">
+                {% for book in books %}
+                    <div class="col-6 col-md-4 col-xl-3">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="{{book.get_absolute_url}}">
+                                    <img src="{{book.image.url}}">
+                                </a>
+                            </figure>
+                            <div class="product-details">
+                                <h2 class="product-title">
+                                    <a href="{{book.get_absolute_url}}">{{book.title}}</a>
+                                </h2>
+                                <div class="price-box">
+                                    {% if book.discount_price %}
+                                       <span class="old-price" id="discount-price">$ {{book.price}}</span>
+                                       <span class="product-price" id="price">$ {{book.discount_price}}</span>
+                                    {% else %}
+                                       <span class="product-price" id="price">$ {{book.price}}</span>
+                                    {% endif %}
+                                 </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div><!-- End .col-md-4 -->
+                {% endfor %}
+            </div>
+        </div><!-- End .container-fluid -->
+
+    </main><!-- End .main -->
+
+{% endblock %}
